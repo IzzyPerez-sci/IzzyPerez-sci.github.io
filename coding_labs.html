@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Izzy Perez – Portfolio</title>
+
+  <style>
+    
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    }
+
+    /* Header */
+    #header {
+      padding: 30px;
+      border-bottom: 2px solid white;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: black;
+    }
+
+    /* Navigation bar */
+    #nav {
+      display: flex;
+      gap: 10px;
+      padding: 10px 20px;
+      border-bottom: 2px solid white;
+      background: black;
+    }
+
+    .nav-btn {
+      border: 2px solid white;
+      padding: 10px 20px;
+      font-size: 20px;
+      text-decoration: none;
+      color: white;
+      background: black;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #222;
+    }
+    
+    .current {
+    color: yellow !important;
+    border-color: yellow !important;
+    }
+
+    /* Page Backround */
+    #main {
+      background-image: url("coding_background.jpg"); 
+      background-size: cover;
+      background-position: center;
+      padding: 40px;
+      min-height: 85vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .text-box {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      font-size: 20px;
+      border: 1px solid #444;
+    }
+
+    /* Page titles (used across multiple pages) */
+    .page-title {
+      text-align: center;
+      font-size: 60px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin: 50px 0;
+      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    }
+
+    /* A reusable vertical link list (used on Research, Coding, etc.) */
+    .link-list {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .clean-link {
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      letter-spacing: 1px;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+      width: fit-content;
+      transition: 0.3s;
+    }
+
+    .clean-link:hover {
+      opacity: 0.7;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER (same on all pages) -->
+  <div id="header">IZZY PEREZ</div>
+
+  <!-- NAVIGATION BAR (same on all pages) -->
+  <div id="nav">
+    <a class="nav-btn" href="index.html">About Me</a>
+    <a class="nav-btn" href="research.html">Research</a>
+    <a class="nav-btn" href="writing.html">Science Writing</a>
+    <a class="nav-btn current" href="coding.html">Coding</a>
+    <a class="nav-btn" href="creative.html">Creative/Art</a>
+  </div>
+
+  <!-- Main Page -->
+  <div id="main">
+    <div class="content-container">
+
+     <!-- PAGE TITLE -->
+        <h1 class="page-title">Labs</h1>
+
+    <div class="text-box" style="width: 80%; margin: 0 auto;">
+
+     
+
+</div>
+
+
+    </div>
+  </div>
+
+</body>
+</html>
