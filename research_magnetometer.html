@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Izzy Perez – Magnetometer</title>
+
+  <style>
+    body{margin:0;background:black;color:white;font-family:"Century Gothic",CenturyGothic,AppleGothic,sans-serif}
+
+    #header{padding:30px;border-bottom:2px solid white;font-size:40px;font-weight:700;letter-spacing:2px;background:black}
+
+    #nav{display:flex;gap:10px;padding:10px 20px;border-bottom:2px solid white;background:black;flex-wrap:wrap}
+    .nav-btn{border:2px solid white;padding:10px 20px;font-size:20px;text-decoration:none;color:white;background:black;transition:.3s}
+    .nav-btn:hover{background:#222}
+    .current{color:yellow!important;border-color:yellow!important}
+
+    #main{background-image:url("research_background.jpg");background-size:cover;background-position:center;padding:40px 20px;min-height:85vh;display:flex;justify-content:center}
+    .text-box{background:rgba(0,0,0,.75);padding:30px;border:1px solid #444;max-width:900px;width:100%}
+
+    .page-title{text-align:center;font-size:56px;font-weight:700;letter-spacing:3px;margin:10px 0 30px}
+    .section{margin-top:45px;padding-top:35px;border-top:1px solid #444}
+    .section h2{font-size:34px;margin:0 0 12px}
+    .section p{font-size:22px;line-height:1.6;margin:0 0 18px}
+    .mini-title{font-size:22px;font-weight:700;margin:22px 0 10px}
+    .media{width:100%;border:1px solid #444;margin-top:14px}
+
+    .yellow-link{color:yellow;text-decoration:none}
+    .yellow-link:hover{text-decoration:underline}
+
+    ul{margin:10px 0 0 20px}
+    li{margin:8px 0;font-size:20px;line-height:1.5}
+
+    /* Housing iteration scroller (smaller) */
+    .photo-container{
+      position:relative;
+      width:100%;
+      max-width:420px;          /* smaller */
+      margin:18px auto 0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .photo-container img{
+      width:100%;
+      border:1px solid #444;
+    }
+    .arrow-btn{
+      background:rgba(0,0,0,.6);
+      border:1px solid #666;
+      color:white;
+      font-size:22px;           /* smaller */
+      padding:6px 10px;         /* smaller */
+      cursor:pointer;
+      transition:.2s;
+    }
+    .arrow-btn:hover{background:#222}
+    #housing-left{position:absolute;left:-40px}   /* closer in */
+    #housing-right{position:absolute;right:-40px} /* closer in */
+
+    .download-box{border:1px solid #444;padding:16px;margin-top:14px;background:rgba(0,0,0,.35)}
+    .download-box p{font-size:20px;margin:10px 0 0}
+  </style>
+</head>
+
+<body>
+
+  <div id="header">IZZY PEREZ</div>
+
+  <div id="nav">
+    <a class="nav-btn" href="index.html">About Me</a>
+    <a class="nav-btn current" href="research.html">Research</a>
+    <a class="nav-btn" href="writing.html">Science Writing</a>
+    <a class="nav-btn" href="coding.html">Coding</a>
+    <a class="nav-btn" href="creative.html">Creative/Art</a>
+  </div>
+
+  <div id="main">
+    <div class="text-box">
+
+      <h1 class="page-title">Solar-Powered 3-Axis Magnetometer</h1>
+
+      <p>
+        This project focuses on the design and deployment of a low-cost, field-deployable magnetometer
+        capable of long-term magnetic field measurements with wireless data access.
+      </p>
+
+      <!-- Goals and Background -->
+      <div class="section">
+        <h2>Goals and Background</h2>
+
+        <p>
+          The goal of this project is to design a magnetometer system that is cost-effective, solar-powered,
+          and suitable for long-duration outdoor deployment.
+        </p>
+
+        <div class="mini-title">System Requirements</div>
+
+        <embed src="research_magnetometer_system-requirements.pdf" type="application/pdf" width="100%" height="500px" class="media">
+
+        <p style="margin-top:14px;font-size:18px;">
+          <a class="yellow-link" href="research_magnetometer_system-requirements.pdf" target="_blank">Open PDF in new tab →</a>
+        </p>
+      </div>
+
+      <!-- Electronics -->
+      <div class="section">
+        <h2>Electronics</h2>
+
+        <div class="mini-title">Wiring diagram</div>
+        <img src="research_magnetometer_wiring-diagram.jpg" class="media" alt="Magnetometer wiring diagram">
+
+        <div class="mini-title">Components</div>
+        <ul>
+          <li><b>3-axis magnetometer sensor:</b> measures X, Y, Z field components</li>
+          <li><b>Microcontroller:</b> triggers measurements, timestamps, and controls logging</li>
+          <li><b>SD card module:</b> stores long runs locally as text files</li>
+          <li><b>Power system:</b> solar panel, charge controller, LiFePO4 battery</li>
+          <li><b>WiFi:</b> enables wireless access to live data and downloads</li>
+        </ul>
+      </div>
+
+      <!-- Housing -->
+      <div class="section">
+        <h2>Housing</h2>
+
+        <p>
+          The housing design went through multiple iterations to improve weather resistance, cable routing,
+          and ease of deployment.
+        </p>
+
+        <div class="mini-title">Past iterations</div>
+
+        <div class="photo-container">
+          <button class="arrow-btn" id="housing-left">&#10094;</button>
+          <img id="housing-slideshow" src="housing_iteration_1.png" alt="Housing iteration slideshow">
+          <button class="arrow-btn" id="housing-right">&#10095;</button>
+        </div>
+
+        <div class="mini-title">Current design</div>
+        <img src="housing_current_design.png" class="media" alt="Current housing design">
+
+        <div class="mini-title">Download STEP files</div>
+        <p style="font-size:20px;line-height:1.6;margin:0;">
+          <a class="yellow-link" href="magnetometer_housing.step" download>Download housing STEP →</a>
+        </p>
+      </div>
+
+      <!-- Software (moved ABOVE Website) -->
+      <div class="section">
+        <h2>Software</h2>
+
+        <p>
+          The instrument runs MicroPython to read the sensor, timestamp and log data to the SD card,
+          and support wireless access.
+        </p>
+
+        <div class="download-box">
+          <div class="mini-title" style="margin:0 0 8px;">Download code</div>
+          <p><a class="yellow-link" href="magnetometer_micropython_code.zip" download>Download MicroPython code (.zip) →</a></p>
+          <p><a class="yellow-link" href="main.py" download>Download main.py →</a></p>
+          <p><a class="yellow-link" href="mmc5983ma_driver.py" download>Download driver →</a></p>
+        </div>
+      </div>
+
+      <!-- Website -->
+      <div class="section">
+        <h2>Website</h2>
+
+        <p>
+          Users can connect wirelessly and access the instrument by entering its IP address in a browser.
+          The website displays live measurements and allows direct data downloads.
+        </p>
+
+        <img src="magnetometer_website_preview.png" class="media" alt="Magnetometer website preview">
+      </div>
+
+      <!-- Results -->
+      <div class="section">
+        <h2>Current Results</h2>
+
+        <img src="field_test_1_graph.png" class="media" alt="Field test 1 graph">
+        <img src="field_test_2_graph.png" class="media" alt="Field test 2 graph">
+
+        <div class="mini-title">Next run improvements</div>
+        <ul>
+          <li>noise reduction through improved averaging</li>
+          <li>better long-run timekeeping and run labeling</li>
+          <li>refined sealing and strain relief based on field tests</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Housing Slideshow Script -->
+  <script>
+    const housingPhotos = [
+      "housing_iteration_1.png",
+      "housing_iteration_2.png",
+      "housing_iteration_3.png",
+      "housing_iteration_4.png"
+    ];
+
+    let housingIndex = 0;
+
+    const housingImg = document.getElementById("housing-slideshow");
+    const housingLeft = document.getElementById("housing-left");
+    const housingRight = document.getElementById("housing-right");
+
+    housingRight.addEventListener("click", () => {
+      housingIndex = (housingIndex + 1) % housingPhotos.length;
+      housingImg.src = housingPhotos[housingIndex];
+    });
+
+    housingLeft.addEventListener("click", () => {
+      housingIndex = (housingIndex - 1 + housingPhotos.length) % housingPhotos.length;
+      housingImg.src = housingPhotos[housingIndex];
+    });
+  </script>
+
+</body>
+</html>
