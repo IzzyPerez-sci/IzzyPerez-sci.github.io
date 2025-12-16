@@ -5,7 +5,6 @@
   <title>Izzy Perez – Portfolio</title>
 
   <style>
-    
     body {
       margin: 0;
       background: black;
@@ -30,6 +29,7 @@
       padding: 10px 20px;
       border-bottom: 2px solid white;
       background: black;
+      flex-wrap: wrap;
     }
 
     .nav-btn {
@@ -42,18 +42,16 @@
       transition: 0.3s;
     }
 
-    .nav-btn:hover {
-      background: #222;
-    }
-    
+    .nav-btn:hover { background: #222; }
+
     .current {
-    color: yellow !important;
-    border-color: yellow !important;
+      color: yellow !important;
+      border-color: yellow !important;
     }
 
-    /* Page Backround */
+    /* Page Background */
     #main {
-      background-image: url("coding_background.jpg"); 
+      background-image: url("coding_background.jpg");
       background-size: cover;
       background-position: center;
       padding: 40px;
@@ -67,9 +65,10 @@
       padding: 30px;
       font-size: 20px;
       border: 1px solid #444;
+      width: 80%;
+      margin: 0 auto;
     }
 
-    /* Page titles (used across multiple pages) */
     .page-title {
       text-align: center;
       font-size: 60px;
@@ -79,39 +78,41 @@
       font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     }
 
-    /* A reusable vertical link list (used on Research, Coding, etc.) */
-    .link-list {
-      width: 80%;
+    /* Game layout */
+    #game-wrap {
+      width: 100%;
+      max-width: 750px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
     }
 
-    .clean-link {
-      color: white;
-      text-decoration: none;
-      font-size: 24px;
-      letter-spacing: 1px;
-      border-bottom: 2px solid white;
-      padding-bottom: 5px;
-      width: fit-content;
-      transition: 0.3s;
+    #gameCanvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 2px solid #444;
     }
 
-    .clean-link:hover {
-      opacity: 0.7;
+    #radius-ui {
+      margin-top: 10px;
+      text-align: center;
     }
 
+    #radiusSlider {
+      width: 100%;
+      display: block;
+    }
+
+    #radiusValue {
+      margin-top: 6px;
+      font-size: 18px;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER (same on all pages) -->
   <div id="header">IZZY PEREZ</div>
 
-  <!-- NAVIGATION BAR (same on all pages) -->
   <div id="nav">
     <a class="nav-btn" href="index.html">About Me</a>
     <a class="nav-btn" href="research.html">Research</a>
@@ -120,22 +121,28 @@
     <a class="nav-btn" href="creative.html">Creative/Art</a>
   </div>
 
-  <!-- Main Page -->
   <div id="main">
-    <div class="content-container">
+    <div class="content-container" style="width:100%;">
 
-     <!-- PAGE TITLE -->
-        <h1 class="page-title">Black Hole Time Dialation Simulation</h1>
+      <h1 class="page-title">Black Hole Time Dilation Simulation</h1>
 
-    <div class="text-box" style="width: 80%; margin: 0 auto;">
+      <div class="text-box">
+        <div id="game-wrap">
+          <canvas id="gameCanvas" width="750" height="750"></canvas>
 
-     
-
-</div>
-
+          <!-- Slider is always visible, but only matters on the start screen -->
+          <div id="radius-ui">
+            <input type="range" id="radiusSlider" min="0" max="1" value="0" step="1">
+            <div id="radiusValue">Selected: —</div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
+
+  <!-- Your game code lives in its own file -->
+  <script src="coding_blackhole_gamecode.js"></script>
 
 </body>
 </html>
