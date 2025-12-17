@@ -30,35 +30,51 @@
     ul{margin:10px 0 0 20px}
     li{margin:8px 0;font-size:20px;line-height:1.5}
 
-    /* Housing iteration scroller (smaller) */
-    .photo-container{
+    .download-box{border:1px solid #444;padding:16px;margin-top:14px;background:rgba(0,0,0,.35)}
+    .download-box p{font-size:20px;margin:10px 0 0}
+
+    /* Graph carousel */
+    .carousel{
       position:relative;
       width:100%;
-      max-width:420px;          /* smaller */
-      margin:18px auto 0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+      margin-top:14px;
     }
-    .photo-container img{
+    .carousel img{
       width:100%;
       border:1px solid #444;
+      display:block;
     }
-    .arrow-btn{
+    .carousel .arrow-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
       background:rgba(0,0,0,.6);
       border:1px solid #666;
       color:white;
-      font-size:22px;           /* smaller */
-      padding:6px 10px;         /* smaller */
+      font-size:26px;
+      padding:10px 14px;
       cursor:pointer;
       transition:.2s;
+      user-select:none;
     }
-    .arrow-btn:hover{background:#222}
-    #housing-left{position:absolute;left:-40px}   /* closer in */
-    #housing-right{position:absolute;right:-40px} /* closer in */
+    .carousel .arrow-btn:hover{background:#222}
+    .carousel .left{left:10px}
+    .carousel .right{right:10px}
 
-    .download-box{border:1px solid #444;padding:16px;margin-top:14px;background:rgba(0,0,0,.35)}
-    .download-box p{font-size:20px;margin:10px 0 0}
+    .carousel-dots{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top:10px;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#666;
+      cursor:pointer;
+    }
+    .dot.active{background:yellow}
   </style>
 </head>
 
@@ -79,11 +95,6 @@
 
       <h1 class="page-title">Solar-Powered 3-Axis Magnetometer</h1>
 
-      <p>
-        This project focuses on the design and deployment of a low-cost, field-deployable magnetometer
-        capable of long-term magnetic field measurements with wireless data access.
-      </p>
-
       <!-- Goals and Background -->
       <div class="section">
         <h2>Goals and Background</h2>
@@ -91,6 +102,18 @@
         <p>
           The goal of this project is to design a magnetometer system that is cost-effective, solar-powered,
           and suitable for long-duration outdoor deployment.
+        </p>
+
+        <p>
+          Earth’s magnetic field originates in the molten outer core and extends into the magnetosphere, where it shields Earth
+          from the solar wind. Interactions with the solar wind produce magnetic field variations ranging from quiet daily
+          variations of a few tens of nanoteslas, to substorms producing ~10–100 nT disturbances, and larger geomagnetic storms
+          that can exceed 100 nT.
+        </p>
+
+        <p>
+          It is difficult and expensive to acquire magnetometers designed for long-term monitoring of Earth’s magnetic field variations.
+          While magnetometers are commercially available, many are wired, stationary, and not designed for autonomous data collection.
         </p>
 
         <div class="mini-title">System Requirements</div>
@@ -105,6 +128,16 @@
       <!-- Electronics -->
       <div class="section">
         <h2>Electronics</h2>
+
+        <p>
+          The instrument is powered by rechargeable LiFePO4 batteries, charged either through a solar panel regulated by a solar
+          charge controller or via a micro-USB connection to the Raspberry Pi Pico 2W.
+        </p>
+
+        <p>
+          A Raspberry Pi Pico 2W communicates with the MMC5983MA magnetometer over I²C to acquire three-axis magnetic field
+          measurements. Measurement data are written locally from the Pico to a SD card for long-term storage.
+        </p>
 
         <div class="mini-title">Wiring diagram</div>
         <img src="research_magnetometer_wiring-diagram.png" class="media" alt="Magnetometer wiring diagram">
@@ -123,20 +156,22 @@
         <h2>Housing</h2>
 
         <p>
-          The housing design went through multiple iterations to improve weather resistance, cable routing,
-          and ease of deployment.
+          The mechanical design was optimized to be compact, weatherproof, and to separate the magnetometer from other electronics
+          to reduce interference.
         </p>
 
-        <div class="mini-title">Past iterations</div>
+        <p>
+          The enclosure consists of three parts: an upper mount for the sensor, a lower mount for the batteries and electronics,
+          and an outer housing. The mounts slide into the housing and are oriented to allow easy access to the Pico’s micro-USB
+          port and SD card.
+        </p>
 
-        <div class="photo-container">
-          <button class="arrow-btn" id="housing-left">&#10094;</button>
-          <img id="housing-slideshow" src="housing_iteration_1.png" alt="Housing iteration slideshow">
-          <button class="arrow-btn" id="housing-right">&#10095;</button>
-        </div>
+        <p>
+          The design minimizes print time and material usage, requiring 142 g of filament and approximately 9.9 hours to print.
+        </p>
 
-        <div class="mini-title">Current design</div>
-        <img src="housing_current_design.png" class="media" alt="Current housing design">
+        <div class="mini-title">Housing Design</div>
+        <img src="research_magnetomter_housing.png" class="media" alt="Housing design">
 
         <div class="mini-title">Download STEP files</div>
         <p style="font-size:20px;line-height:1.6;margin:0;">
@@ -144,7 +179,7 @@
         </p>
       </div>
 
-      <!-- Software (moved ABOVE Website) -->
+      <!-- Software -->
       <div class="section">
         <h2>Software</h2>
 
@@ -153,11 +188,15 @@
           and support wireless access.
         </p>
 
+        <p>
+          A custom driver was written in MicroPython for the Raspberry Pi Pico 2W to control the MMC5983MA magnetometer over I²C,
+          trigger magnetic and temperature measurements, apply periodic SET/RESET, and timestamp data using the Pico’s millisecond
+          clock. Measurements are averaged and then logged to an SD card using an SD card breakout board over SPI.
+        </p>
+
         <div class="download-box">
           <div class="mini-title" style="margin:0 0 8px;">Download code</div>
-          <p><a class="yellow-link" href="magnetometer_micropython_code.zip" download>Download MicroPython code (.zip) →</a></p>
-          <p><a class="yellow-link" href="main.py" download>Download main.py →</a></p>
-          <p><a class="yellow-link" href="mmc5983ma_driver.py" download>Download driver →</a></p>
+          <p><a class="yellow-link" href="research_magnetomter_main-code.py" download>Download Code→</a></p>
         </div>
       </div>
 
@@ -166,8 +205,9 @@
         <h2>Website</h2>
 
         <p>
-          Users can connect wirelessly and access the instrument by entering its IP address in a browser.
-          The website displays live measurements and allows direct data downloads.
+          The Pico 2W hosts a WiFi access point and runs a web server that allows users to connect directly to the instrument by
+          entering its IP address in a browser. The website displays a live graph of the three magnetic field components and allows
+          users to download data.
         </p>
 
         <img src="magnetometer_website_preview.png" class="media" alt="Magnetometer website preview">
@@ -177,45 +217,71 @@
       <div class="section">
         <h2>Current Results</h2>
 
-        <img src="field_test_1_graph.png" class="media" alt="Field test 1 graph">
-        <img src="field_test_2_graph.png" class="media" alt="Field test 2 graph">
+        <!-- Graph Carousel -->
+        <div class="carousel">
+          <button class="arrow-btn left" id="graph-left">&#10094;</button>
+          <img id="graph-slideshow" src="research_magnetometer_graph1.png" alt="Magnetometer field test graph">
+          <button class="arrow-btn right" id="graph-right">&#10095;</button>
+        </div>
 
-        <div class="mini-title">Next run improvements</div>
-        <ul>
-          <li>noise reduction through improved averaging</li>
-          <li>better long-run timekeeping and run labeling</li>
-          <li>refined sealing and strain relief based on field tests</li>
-        </ul>
+        <div class="carousel-dots" id="graph-dots"></div>
+
+        <p style="margin-top:18px;">
+          Three long-term deployments have been conducted so far. The first two revealed a drifting Y measurement, which was
+          caused by sensor drift. To address this, I implemented the sensor’s SET/RESET capability, which switches the orientation of
+          the sensing element. The third test shows that this SET/RESET prevented sensor drift. The instrument was slightly bumped in the
+          middle of the third test, but overall was very flat. A long term test is currently underway to hopefully pick up any variations
+          due to geomagnetic activity.
+        </p>
       </div>
 
     </div>
   </div>
 
-  <!-- Housing Slideshow Script -->
+  <!-- Graph Carousel Script -->
   <script>
-    const housingPhotos = [
-      "housing_iteration_1.png",
-      "housing_iteration_2.png",
-      "housing_iteration_3.png",
-      "housing_iteration_4.png"
+    const graphPhotos = [
+      "research_magnetometer_graph1.png",
+      "research_magnetometer_graph2.png",
+      "research_magnetometer_graph3.png"
     ];
 
-    let housingIndex = 0;
+    let graphIndex = 0;
 
-    const housingImg = document.getElementById("housing-slideshow");
-    const housingLeft = document.getElementById("housing-left");
-    const housingRight = document.getElementById("housing-right");
+    const graphImg = document.getElementById("graph-slideshow");
+    const graphLeft = document.getElementById("graph-left");
+    const graphRight = document.getElementById("graph-right");
+    const dotsContainer = document.getElementById("graph-dots");
 
-    housingRight.addEventListener("click", () => {
-      housingIndex = (housingIndex + 1) % housingPhotos.length;
-      housingImg.src = housingPhotos[housingIndex];
+    function renderDots(){
+      dotsContainer.innerHTML = "";
+      for(let i = 0; i < graphPhotos.length; i++){
+        const d = document.createElement("div");
+        d.className = "dot" + (i === graphIndex ? " active" : "");
+        d.addEventListener("click", () => {
+          graphIndex = i;
+          graphImg.src = graphPhotos[graphIndex];
+          renderDots();
+        });
+        dotsContainer.appendChild(d);
+      }
+    }
+
+    graphRight.addEventListener("click", () => {
+      graphIndex = (graphIndex + 1) % graphPhotos.length;
+      graphImg.src = graphPhotos[graphIndex];
+      renderDots();
     });
 
-    housingLeft.addEventListener("click", () => {
-      housingIndex = (housingIndex - 1 + housingPhotos.length) % housingPhotos.length;
-      housingImg.src = housingPhotos[housingIndex];
+    graphLeft.addEventListener("click", () => {
+      graphIndex = (graphIndex - 1 + graphPhotos.length) % graphPhotos.length;
+      graphImg.src = graphPhotos[graphIndex];
+      renderDots();
     });
+
+    renderDots();
   </script>
 
 </body>
 </html>
+
